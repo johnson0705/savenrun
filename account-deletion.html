@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>帳戶與資料刪除 — 資產地圖（Asset Map）</title>
+<style>
+  body { font-family: -apple-system, "Segoe UI", "Microsoft JhengHei", sans-serif; line-height: 1.7; max-width: 720px; margin: 2em auto; padding: 0 1em; color: #222; }
+  h1 { color: #3B82F6; border-bottom: 2px solid #3B82F6; padding-bottom: 0.4em; }
+  h2 { color: #1E3A8A; margin-top: 1.8em; }
+  ul { padding-left: 1.4em; }
+  code { background: #f1f4f9; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.95em; }
+  .note { background: #FFF9E6; border-left: 4px solid #F1B74C; padding: 0.8em 1em; margin: 1em 0; border-radius: 4px; }
+  .step { background: #F1F8FF; border-left: 4px solid #3B82F6; padding: 0.8em 1em; margin: 1em 0; border-radius: 4px; }
+  a { color: #3B82F6; }
+</style>
+</head>
+<body>
+
+<h1>帳戶與資料刪除</h1>
+<p><strong>App：</strong>資產地圖（Asset Map）<br>
+<strong>開發者：</strong>Johnson Chang（<a href="mailto:johnson0705.chang@gmail.com">johnson0705.chang@gmail.com</a>）<br>
+<strong>生效日期：</strong>2026-04-18</p>
+
+<h2>一、刪除方式</h2>
+
+<div class="step">
+<p><strong>方法 A — App 內刪除（建議）：</strong></p>
+<ol>
+  <li>開啟「資產地圖」App</li>
+  <li>進入「設定」頁</li>
+  <li>捲到「帳號」區塊</li>
+  <li>點擊「<strong>刪除帳號</strong>」按鈕</li>
+  <li>確認後，App 會同步刪除本機與雲端所有資料</li>
+</ol>
+</div>
+
+<div class="step">
+<p><strong>方法 B — Email 申請刪除：</strong></p>
+<p>若您已解除安裝 App 或無法使用 App，請寄 email 至：</p>
+<p><a href="mailto:johnson0705.chang@gmail.com?subject=刪除帳戶申請">johnson0705.chang@gmail.com</a></p>
+<p>信件內容請包含：</p>
+<ul>
+  <li>您登入時使用的 Google 帳號 email</li>
+  <li>刪除原因（選填）</li>
+</ul>
+<p>開發者會在 <strong>7 個工作日內</strong>完成帳戶與所有資料刪除，並回信確認。</p>
+</div>
+
+<h2>二、會被刪除的資料</h2>
+<ul>
+  <li>✅ Google 帳號關聯（email、顯示名稱）</li>
+  <li>✅ 所有股票、虛擬幣、存款、定存持倉資料（本機 Room 資料庫 + Firestore 雲端）</li>
+  <li>✅ 交易歷史、成本追蹤記錄</li>
+  <li>✅ 淨資產月度快照</li>
+  <li>✅ 財務目標設定</li>
+  <li>✅ 意見回饋訊息</li>
+  <li>✅ App 設定偏好（主題、隱私模式、提醒開關等）</li>
+</ul>
+
+<h2>三、保留期限</h2>
+<div class="note">
+<p><strong>帳戶與個人資產資料：</strong>收到刪除請求後立即刪除（無保留期）。</p>
+<p><strong>Firebase Crashlytics 當機記錄（含裝置型號、OS 版本、匿名 Installation ID）：</strong>依 Google 預設策略保留 <strong>90 天</strong>後自動刪除。這些記錄不包含個人身分資訊（PII）或資產資料。</p>
+<p><strong>Google Sign-In OAuth Token：</strong>刪除帳戶後立即撤銷。</p>
+</div>
+
+<h2>四、部分刪除（非刪除整個帳戶）</h2>
+<p>若您只想刪除部分資料而非整個帳戶，可在 App 內：</p>
+<ul>
+  <li>刪除個別股票持倉（股票列表 → 長按 → 刪除）</li>
+  <li>刪除個別虛擬幣持倉（虛擬幣列表 → 刪除）</li>
+  <li>刪除個別存款帳戶、定存記錄</li>
+  <li>清除意見回饋草稿</li>
+</ul>
+
+<h2>五、疑問聯絡</h2>
+<p>如對帳戶或資料刪除有任何疑問，請聯絡：</p>
+<p>📧 <a href="mailto:johnson0705.chang@gmail.com">johnson0705.chang@gmail.com</a></p>
+
+<hr>
+<p style="color: #888; font-size: 0.9em;">隱私權政策：<a href="./">https://johnson0705.github.io/savenrun/</a></p>
+
+</body>
+</html>
