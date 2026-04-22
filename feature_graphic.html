@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<title>Feature Graphic 1024×500 — 資產地圖</title>
+<style>
+  :root{
+    --brand:#3B82F6;
+    --brand-2:#60A5FA;
+    --gold:#F59E0B;
+    --gold-light:#FCD34D;
+    --profit:#10B981;
+    --loss:#EF4444;
+    --ink:#F0F6FC;
+    --ink-2:#CBD5E1;
+    --ink-3:#94A3B8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#0A0F1C;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased;}
+  .stage{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:40px;}
+  .graphic{
+    width:1024px;height:500px;
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(900px 600px at 88% 115%, rgba(59,130,246,.38), transparent 55%),
+      radial-gradient(600px 500px at 0% -5%, rgba(245,158,11,.14), transparent 55%),
+      linear-gradient(135deg,#081436 0%, #152A6B 48%, #22479C 100%);
+    color:var(--ink);
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+  }
+
+  /* === 左側品牌 + 文案 === */
+  .copy{
+    position:absolute;left:72px;top:64px;max-width:540px;z-index:3;
+  }
+  /* Brand lockup — 真實 icon + wordmark */
+  .brand{
+    display:flex;align-items:center;gap:14px;margin-bottom:26px;
+  }
+  .brand-icon{
+    width:54px;height:54px;border-radius:14px;
+    background:linear-gradient(145deg,#F5F1E6 0%,#E5DECC 100%);
+    display:grid;place-items:center;flex-shrink:0;
+    box-shadow:0 8px 22px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.6);
+  }
+  .brand-wordmark{
+    display:flex;flex-direction:column;line-height:1.1;
+  }
+  .brand-wordmark .zh{font-size:28px;font-weight:900;color:#fff;letter-spacing:.02em;}
+  .brand-wordmark .en{font-size:11px;font-weight:700;color:var(--ink-3);letter-spacing:.28em;text-transform:uppercase;margin-top:2px;}
+
+  h1{
+    font-size:64px;font-weight:900;line-height:1.1;
+    letter-spacing:-.015em;
+    color:#fff;
+    text-shadow:0 2px 30px rgba(0,0,0,.3);
+  }
+  h1 .gold{
+    background:linear-gradient(180deg,#FDE68A 0%,#F59E0B 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    /* 保留輕微陰影不靠 shadow on transparent text */
+  }
+  .lead{
+    margin-top:14px;font-size:17px;font-weight:500;line-height:1.5;
+    color:var(--ink-2);max-width:480px;
+  }
+  .lead b{color:#fff;font-weight:700;}
+
+  /* === 10 級階梯 mini-roadmap（4 個里程碑）=== */
+  .roadmap{
+    margin-top:22px;position:relative;width:500px;
+  }
+  .roadmap-track{
+    position:absolute;left:26px;right:26px;top:16px;height:2px;
+    background:linear-gradient(90deg,
+      rgba(255,255,255,.12) 0%,
+      rgba(255,255,255,.22) 35%,
+      rgba(245,158,11,.55) 75%,
+      rgba(252,211,77,.85) 100%);
+    border-radius:999px;
+  }
+  .roadmap-nodes{
+    display:flex;justify-content:space-between;position:relative;z-index:1;
+  }
+  .node{
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    width:80px;text-align:center;
+  }
+  .node .dot{
+    width:32px;height:32px;border-radius:50%;
+    background:#152A6B;border:2px solid rgba(255,255,255,.22);
+    display:grid;place-items:center;
+    color:#fff;font-size:15px;line-height:1;
+    transition:all .2s;
+  }
+  .node .lbl{font-size:12px;font-weight:700;color:var(--ink-2);white-space:nowrap;}
+  .node .amt{font-size:10px;font-weight:600;color:var(--ink-3);letter-spacing:.02em;}
+
+  /* 使用者當前位置（百萬 / Lv.3）— 金色 ring + 脈動 */
+  .node.here .dot{
+    background:linear-gradient(135deg,#F59E0B,#FCD34D);
+    border:2px solid #FEF3C7;
+    box-shadow:0 0 0 5px rgba(245,158,11,.25), 0 4px 14px rgba(245,158,11,.45);
+    transform:scale(1.08);
+  }
+  .node.here .lbl{color:#FCD34D;}
+  .node.here .amt{color:#FDE68A;}
+  .here-pin{
+    position:absolute;top:-22px;left:50%;transform:translateX(-50%);
+    padding:2px 8px;border-radius:999px;
+    background:#F59E0B;color:#1E3A8A;
+    font-size:10px;font-weight:900;letter-spacing:.05em;
+    white-space:nowrap;
+    box-shadow:0 4px 10px rgba(245,158,11,.5);
+  }
+  .here-pin::after{
+    content:"";position:absolute;bottom:-4px;left:50%;transform:translateX(-50%) rotate(45deg);
+    width:6px;height:6px;background:#F59E0B;
+  }
+
+  /* 終點（億 / Lv.10）— 金色皇冠 glow */
+  .node.goal .dot{
+    background:radial-gradient(circle,#FEF3C7 0%,#F59E0B 70%);
+    border:2px solid #FEF3C7;
+    box-shadow:0 0 20px rgba(252,211,77,.75), 0 0 40px rgba(245,158,11,.35);
+    animation:glow 2s ease-in-out infinite alternate;
+  }
+  .node.goal .lbl{
+    background:linear-gradient(180deg,#FDE68A,#F59E0B);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    font-weight:900;
+  }
+  @keyframes glow{
+    from{box-shadow:0 0 16px rgba(252,211,77,.55), 0 0 30px rgba(245,158,11,.25);}
+    to  {box-shadow:0 0 24px rgba(252,211,77,.85), 0 0 48px rgba(245,158,11,.45);}
+  }
+
+  /* === 右側 Phone Mock === */
+  .phone-wrap{
+    position:absolute;right:60px;top:50%;transform:translateY(-50%) rotate(-6deg);
+    width:302px;height:600px;z-index:2;
+    filter:drop-shadow(0 32px 60px rgba(0,0,0,.55));
+  }
+  .phone{
+    position:absolute;inset:0;
+    border-radius:44px;
+    background:linear-gradient(160deg,#1F2937 0%,#0B1220 100%);
+    border:3px solid #0F172A;
+    padding:10px;
+    overflow:hidden;
+  }
+  .screen{
+    border-radius:34px;background:#0D1117;height:100%;
+    padding:20px 14px 14px;color:var(--ink);position:relative;overflow:hidden;
+  }
+  .screen-top{
+    display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;
+  }
+  .screen-top .hi{font-size:13px;font-weight:800;color:#fff;letter-spacing:-.01em;}
+  .screen-top .hi span{color:var(--ink-3);font-weight:600;font-size:11px;margin-left:4px;}
+  .icon-btn{
+    width:28px;height:28px;border-radius:50%;background:#161B22;border:1px solid #21262D;
+    display:inline-grid;place-items:center;color:var(--ink-3);
+  }
+
+  /* Hero 總資產卡 */
+  .hero{
+    position:relative;overflow:hidden;
+    border-radius:18px;padding:14px 16px 14px;
+    background:linear-gradient(135deg,#1E3A5F 0%,#0F2744 55%,#0D1F36 100%);
+    border:1px solid rgba(59,130,246,.26);
+  }
+  .hero::before{
+    content:"";position:absolute;width:170px;height:170px;border-radius:50%;
+    right:-70px;top:-80px;
+    background:radial-gradient(circle,rgba(59,130,246,.26),transparent 70%);
+  }
+  .hero .row1{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
+  .hero .lbl{font-size:11px;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.06em;}
+  .hero .eye{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.08);display:inline-grid;place-items:center;color:#CBD5E1;}
+  .hero .val{
+    font-size:30px;font-weight:900;margin-top:4px;letter-spacing:-.03em;color:#fff;
+    position:relative;z-index:1;font-variant-numeric:tabular-nums;
+  }
+  .hero .pill{
+    display:inline-flex;align-items:center;gap:4px;
+    margin-top:8px;padding:3px 9px;border-radius:999px;
+    background:rgba(16,185,129,.16);color:#34D399;
+    font-size:11px;font-weight:800;position:relative;z-index:1;
+  }
+  /* Hero 大型 Lv badge（主角）+ 副文 */
+  .hero .lv-big{
+    margin-top:12px;padding:5px 12px;border-radius:999px;
+    background:linear-gradient(90deg,rgba(245,158,11,.3),rgba(252,211,77,.18));
+    border:1px solid rgba(252,211,77,.45);
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13px;font-weight:800;
+    position:relative;z-index:1;
+    box-shadow:0 4px 12px rgba(245,158,11,.25);
+  }
+  .hero .lv-big .lv-num{color:#FCD34D;letter-spacing:.02em;}
+  .hero .lv-big .lv-name{color:#fff;}
+  .hero .lv-next{
+    font-size:10px;color:rgba(255,255,255,.55);margin-top:7px;
+    position:relative;z-index:1;font-weight:600;
+  }
+  .hero .lv-next b{color:#FDE68A;font-weight:800;}
+
+  /* 淨資產走勢 sparkline */
+  .spark-card{
+    margin-top:9px;background:#161B22;border:1px solid #21262D;
+    border-radius:14px;padding:11px 12px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .spark-left{flex:1;min-width:0;}
+  .spark-left .t{font-size:11px;color:var(--ink-3);font-weight:600;}
+  .spark-left .v{font-size:17px;font-weight:900;color:var(--profit);letter-spacing:-.02em;margin-top:2px;}
+  .spark-left .s{font-size:10px;color:#64748B;margin-top:2px;}
+  .spark-svg{flex-shrink:0;width:120px;height:44px;}
+  .spark-svg .fill{fill:url(#spgrad);stroke:none;}
+  .spark-svg .line{fill:none;stroke:var(--profit);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round;}
+  .spark-svg .end{fill:var(--profit);filter:drop-shadow(0 0 4px rgba(16,185,129,.9));}
+
+  /* 資產配置 */
+  .alloc{
+    margin-top:9px;background:#161B22;border:1px solid #21262D;
+    border-radius:14px;padding:12px;
+  }
+  .alloc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .alloc-head .t{font-size:12px;font-weight:700;color:var(--ink-3);}
+  .alloc-head .m{font-size:11px;font-weight:700;color:var(--brand-2);}
+  .alloc-body{display:flex;align-items:center;gap:12px;}
+  .alloc-body svg.donut{width:84px;height:84px;flex-shrink:0;}
+  .legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;flex:1;}
+  .legend .li{display:flex;flex-direction:column;}
+  .legend .li .t1{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--ink-3);font-weight:600;}
+  .legend .li .sw{width:7px;height:7px;border-radius:2px;}
+  .legend .li .pct{font-size:11px;font-weight:800;color:#fff;margin-left:auto;}
+
+</style>
+</head>
+<body>
+<!-- Inline SVG icon defs（給 phone mock 與 brand icon 使用）-->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- 眼睛 icon（隱私 toggle）-->
+    <symbol id="i-eye" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+        d="M1.5 12s4-7 10.5-7 10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z"/>
+      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    </symbol>
+    <!-- 鈴鐺 icon -->
+    <symbol id="i-bell" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+        d="M6 8a6 6 0 1112 0c0 6 3 8 3 8H3s3-2 3-8zM10 21a2 2 0 004 0"/>
+    </symbol>
+    <!-- 趨勢箭頭（上升）-->
+    <symbol id="i-trend-up" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        d="M3 17l6-6 4 4 8-9M15 6h6v6"/>
+    </symbol>
+    <!-- 資產地圖 brand mark（折疊地圖 + 上升箭頭 + 針）-->
+    <symbol id="brand-mark" viewBox="0 0 64 64">
+      <!-- 三摺地圖 -->
+      <path d="M10 18 L24 12 L40 18 L54 12 L54 46 L40 52 L24 46 L10 52 Z"
+        fill="#3B82F6" stroke="#1D4ED8" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M24 12 L24 46" stroke="#1D4ED8" stroke-width="1.2" opacity=".45"/>
+      <path d="M40 18 L40 52" stroke="#1D4ED8" stroke-width="1.2" opacity=".45"/>
+      <!-- 地圖反光層 -->
+      <path d="M10 18 L24 12 L40 18 L54 12 L54 20 L40 26 L24 20 L10 26 Z" fill="rgba(255,255,255,.18)"/>
+      <!-- 上升箭頭（白 + 深藍描邊）-->
+      <path d="M14 42 L26 30 L34 36 L48 22"
+        fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M48 22 L42 22 M48 22 L48 28"
+        fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- 黃色圖釘 -->
+      <circle cx="30" cy="34" r="5.2" fill="#1D4ED8"/>
+      <circle cx="30" cy="34" r="3.2" fill="#F59E0B"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="stage">
+  <div class="graphic">
+    <div class="copy">
+      <!-- 品牌 lockup -->
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="40" height="40"><use href="#brand-mark"/></svg>
+        </div>
+        <div class="brand-wordmark">
+          <span class="zh">資產地圖</span>
+          <span class="en">Asset Map</span>
+        </div>
+      </div>
+
+      <h1>距離財務自由，<br/><span class="gold">你走到第幾級？</span></h1>
+
+      <p class="lead">
+        <b>台股 · 美股 · 虛擬幣 · 活存 · 定存</b><br/>
+        一張地圖，看得見每一步的進展。
+      </p>
+
+      <!-- 10 級階梯（顯示 4 個里程碑）-->
+      <div class="roadmap">
+        <div class="roadmap-track"></div>
+        <div class="roadmap-nodes">
+          <div class="node">
+            <div class="dot">🌱</div>
+            <div class="lbl">萌芽</div>
+            <div class="amt">10 萬</div>
+          </div>
+          <div class="node here">
+            <span class="here-pin">你在這</span>
+            <div class="dot">💼</div>
+            <div class="lbl">百萬俱樂部</div>
+            <div class="amt">100 萬</div>
+          </div>
+          <div class="node">
+            <div class="dot">🏆</div>
+            <div class="lbl">千萬俱樂部</div>
+            <div class="amt">1000 萬</div>
+          </div>
+          <div class="node goal">
+            <div class="dot">👑</div>
+            <div class="lbl">傳奇</div>
+            <div class="amt">1 億</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone mock -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="screen">
+          <div class="screen-top">
+            <div class="hi">資產地圖 <span>Hi, Johnson</span></div>
+            <span class="icon-btn"><svg width="14" height="14"><use href="#i-bell"/></svg></span>
+          </div>
+
+          <!-- Hero -->
+          <div class="hero">
+            <div class="row1">
+              <span class="lbl">總資產淨值</span>
+              <span class="eye"><svg width="14" height="14"><use href="#i-eye"/></svg></span>
+            </div>
+            <div class="val">NT$ 1,248,300</div>
+            <div class="pill">
+              <svg width="10" height="10"><use href="#i-trend-up"/></svg>
+              +NT$ 23,450 · +1.91%
+            </div>
+            <div class="lv-big">
+              <span class="lv-num">Lv.3</span>
+              <span class="lv-name">· 百萬俱樂部 💼</span>
+            </div>
+            <div class="lv-next">還差 <b>NT$ 175 萬</b> 升 Lv.4 衝刺</div>
+          </div>
+
+          <!-- 淨資產走勢 sparkline -->
+          <div class="spark-card">
+            <div class="spark-left">
+              <div class="t">淨資產走勢（30日）</div>
+              <div class="v">+3.2%</div>
+              <div class="s">+NT$ 38,420</div>
+            </div>
+            <svg class="spark-svg" viewBox="0 0 120 44" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="spgrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#10B981" stop-opacity="0.38"/>
+                  <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path class="fill" d="M 2,34 L 14,30 L 24,32 L 36,25 L 46,27 L 58,20 L 68,22 L 80,14 L 90,17 L 100,8 L 110,12 L 118,5 L 118,44 L 2,44 Z"/>
+              <path class="line" d="M 2,34 L 14,30 L 24,32 L 36,25 L 46,27 L 58,20 L 68,22 L 80,14 L 90,17 L 100,8 L 110,12 L 118,5"/>
+              <circle class="end" cx="118" cy="5" r="2.4"/>
+            </svg>
+          </div>
+
+          <!-- 資產配置 -->
+          <div class="alloc">
+            <div class="alloc-head">
+              <span class="t">資產配置</span>
+              <span class="m">明細 →</span>
+            </div>
+            <div class="alloc-body">
+              <svg class="donut" viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="14" fill="none" stroke="#21262D" stroke-width="5"/>
+                <circle cx="18" cy="18" r="14" fill="none" stroke="#3B82F6" stroke-width="5"
+                  stroke-dasharray="38 88" stroke-dashoffset="0" transform="rotate(-90 18 18)"/>
+                <circle cx="18" cy="18" r="14" fill="none" stroke="#8B5CF6" stroke-width="5"
+                  stroke-dasharray="22 88" stroke-dashoffset="-38" transform="rotate(-90 18 18)"/>
+                <circle cx="18" cy="18" r="14" fill="none" stroke="#F97316" stroke-width="5"
+                  stroke-dasharray="12 88" stroke-dashoffset="-60" transform="rotate(-90 18 18)"/>
+                <circle cx="18" cy="18" r="14" fill="none" stroke="#06B6D4" stroke-width="5"
+                  stroke-dasharray="16 88" stroke-dashoffset="-72" transform="rotate(-90 18 18)"/>
+              </svg>
+              <div class="legend">
+                <div class="li"><div class="t1"><span class="sw" style="background:#3B82F6"></span>台股<span class="pct">43%</span></div></div>
+                <div class="li"><div class="t1"><span class="sw" style="background:#8B5CF6"></span>美股<span class="pct">25%</span></div></div>
+                <div class="li"><div class="t1"><span class="sw" style="background:#F97316"></span>加密<span class="pct">14%</span></div></div>
+                <div class="li"><div class="t1"><span class="sw" style="background:#06B6D4"></span>活存<span class="pct">18%</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
