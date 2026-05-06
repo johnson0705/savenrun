@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>個人資料蒐集告知 - 資產地圖</title>
+<style>
+  :root {
+    --brand: #3B82F6;
+    --bg: #F8FAFF;
+    --text: #1F2937;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --surface: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Heiti TC', sans-serif;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    margin: 0;
+    padding: 2rem 1rem 4rem;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--surface);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  }
+  h1 {
+    color: var(--brand);
+    border-bottom: 3px solid var(--brand);
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+  }
+  h2 {
+    color: var(--text);
+    border-left: 4px solid var(--brand);
+    padding-left: 0.75rem;
+    margin-top: 2rem;
+  }
+  h3 { color: var(--text); }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .notice {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    font-size: 0.95rem;
+    vertical-align: top;
+  }
+  th { background: var(--bg); font-weight: 600; }
+  a { color: var(--brand); }
+  ul { padding-left: 1.5rem; }
+  li { margin: 0.25rem 0; }
+  footer {
+    max-width: 720px;
+    margin: 1.5rem auto 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<main>
+<h1>個人資料蒐集、處理及利用告知事項</h1>
+<p class="meta"><strong>最後更新日期：2026-05-06</strong><br>依據《個人資料保護法》第 8 條規定告知</p>
+
+<aside role="note" class="notice">
+  本告知依《個人資料保護法》第 8 條規定，於蒐集您的個人資料前，說明蒐集目的、資料類別、利用範圍及您的各項權利。
+</aside>
+
+<h2>一、蒐集主體</h2>
+<table>
+  <caption>個人資料蒐集主體資訊</caption>
+  <tr><th scope="col">項目</th><th scope="col">說明</th></tr>
+  <tr><td>蒐集者</td><td>Johnson Chang（個人開發者）</td></tr>
+  <tr><td>聯絡方式</td><td><a href="mailto:johnson0705.chang@gmail.com">johnson0705.chang@gmail.com</a></td></tr>
+  <tr><td>App 名稱</td><td>資產地圖（Asset Map）</td></tr>
+</table>
+
+<h2>二、蒐集目的</h2>
+<table>
+  <caption>個人資料蒐集目的代號對照（依個資法施行細則附表一）</caption>
+  <tr><th scope="col">目的代號（個資法）</th><th scope="col">目的說明</th></tr>
+  <tr><td>040</td><td>行銷（推播通知，opt-in 同意後）</td></tr>
+  <tr><td>063</td><td>非公務機關依法定義務所進行個人資料之蒐集處理及利用</td></tr>
+  <tr><td>090</td><td>消費者、客戶管理與服務</td></tr>
+  <tr><td>157</td><td>調查、統計與研究分析（匿名當機報告）</td></tr>
+  <tr><td>182</td><td>其他經營合於營業登記項目或組織章程所定之業務（個人財務記錄服務）</td></tr>
+</table>
+
+<h2>三、蒐集的個人資料類別</h2>
+<table>
+  <caption>蒐集的個人資料類別與蒐集方式</caption>
+  <tr><th scope="col">資料類別</th><th scope="col">具體內容</th><th scope="col">蒐集方式</th></tr>
+  <tr>
+    <td>識別類</td>
+    <td>電子郵件地址、Google 帳號顯示名稱</td>
+    <td>Google Sign-In 授權取得</td>
+  </tr>
+  <tr>
+    <td>財務類</td>
+    <td>股票持股（代號、數量、成本）、虛擬貨幣持倉、存款金額、財務目標</td>
+    <td>使用者手動輸入或半自動匯入（CSV / OCR）</td>
+  </tr>
+  <tr>
+    <td>裝置與技術類</td>
+    <td>當機堆疊追蹤、裝置型號、OS 版本（匿名，無個人識別）</td>
+    <td>Firebase Crashlytics 自動蒐集</td>
+  </tr>
+  <tr>
+    <td>影像類（條件性）</td>
+    <td>使用者主動上傳的對帳單截圖或相片</td>
+    <td>僅在使用 OCR 匯入功能時，由使用者主動提供；<strong>處理後不留存於伺服器</strong></td>
+  </tr>
+</table>
+<p><strong>本 App 不蒐集</strong>：位置資訊、通訊錄、通話紀錄、廣告識別碼。</p>
+
+<h2>四、個人資料利用期間、地區、對象及方式</h2>
+<table>
+  <caption>個人資料利用方式說明</caption>
+  <tr><th scope="col">項目</th><th scope="col">說明</th></tr>
+  <tr>
+    <td>利用期間</td>
+    <td>
+      您使用本 App 期間及依法令規定應保存期間。<br>
+      · 帳號刪除後，雲端資料依使用者指示即時刪除<br>
+      · Crashlytics 當機報告：90 天後自動刪除<br>
+      · OCR 上傳圖片：Google Gemini API 處理後不存入本服務資料庫
+    </td>
+  </tr>
+  <tr>
+    <td>利用地區</td>
+    <td>台灣及 Google 雲端基礎設施所在地（美國及全球 Firebase 資料中心）</td>
+  </tr>
+  <tr>
+    <td>利用對象</td>
+    <td>
+      · 您本人（App 內即時呈現）<br>
+      · Firebase / Google（雲端存儲與服務運作，依其隱私權政策）<br>
+      · 其他第三方服務：詳見<a href="./privacy-policy.html">隱私權政策第三方服務章節</a>
+    </td>
+  </tr>
+  <tr>
+    <td>利用方式</td>
+    <td>提供個人財務整合記錄、資產計算、報告生成等 App 核心功能；不用於廣告投放或出售</td>
+  </tr>
+</table>
+
+<h2>五、您依個資法享有的權利</h2>
+<p>依《個人資料保護法》第 3 條，您對本 App 持有的個人資料享有以下權利：</p>
+<ul>
+  <li>✅ <strong>查詢或請求閱覽</strong>：App 內即時呈現您的所有資料</li>
+  <li>✅ <strong>請求製給複製本</strong>：設定 → 資料備份，可匯出完整 JSON</li>
+  <li>✅ <strong>請求補充或更正</strong>：App 內直接編輯各類資料</li>
+  <li>✅ <strong>請求停止蒐集、處理或利用</strong>：刪除帳號即停止（App 內「刪除帳號」功能）</li>
+  <li>✅ <strong>請求刪除</strong>：App 內「刪除帳號」將同時清除本機資料及 Firestore 雲端資料</li>
+</ul>
+<p>如需協助行使上述權利或有相關疑問，請聯絡：<a href="mailto:johnson0705.chang@gmail.com">johnson0705.chang@gmail.com</a></p>
+
+<h2>六、OCR 功能專項告知</h2>
+<p>當您使用「匯入對帳單」或「拍照匯入」功能時：</p>
+<ul>
+  <li>您上傳的圖片或截圖將透過 Google Gemini API 進行文字辨識</li>
+  <li>圖片內容可能包含您的財務資訊（股票代號、金額、交易紀錄等）</li>
+  <li>Google Gemini API 的資料處理規則適用 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google 隱私權政策</a></li>
+  <li>辨識完成後，原始圖片<strong>不儲存於本服務資料庫</strong>，僅辨識結果（純文字數值）存入您的帳號</li>
+  <li>首次使用 OCR 功能前，App 將另行取得您的同意</li>
+</ul>
+
+<h2>七、拒絕提供的後果</h2>
+<ul>
+  <li>拒絕提供電子郵件（拒絕 Google Sign-In）：無法使用雲端同步功能，可使用純本機模式（如有）</li>
+  <li>拒絕提供財務資料：App 核心功能（資產追蹤、報告生成）將無法運作，但不影響帳號登入</li>
+  <li>拒絕 OCR 同意：無法使用 AI 輔助匯入功能，可改用手動輸入或 CSV 匯入</li>
+  <li>拒絕推播通知：不影響 App 使用，僅無法收到月報生成通知</li>
+</ul>
+
+<h2>八、聯絡方式</h2>
+<ul>
+  <li><strong>Email</strong>：<a href="mailto:johnson0705.chang@gmail.com">johnson0705.chang@gmail.com</a></li>
+  <li><strong>App 內回報</strong>：設定 → 意見回饋</li>
+</ul>
+
+</main>
+<footer>
+本告知依《個人資料保護法》第 8 條規定製作，個資蒐集目的代號依個人資料保護法施行細則附表一。
+</footer>
+</body>
+</html>
