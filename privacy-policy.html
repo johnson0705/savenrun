@@ -73,7 +73,7 @@
 <body>
 <main>
 <h1>資產地圖（Asset Map）隱私權政策</h1>
-<p class="meta"><strong>最後更新日期：2026-05-06</strong></p>
+<p class="meta"><strong>最後更新日期：2026-05-10</strong></p>
 
 <h2>關於本政策</h2>
 <p>「資產地圖」（以下簡稱「本 App」）是由 Johnson Chang 獨立開發的個人財務管理工具，協助使用者整合追蹤台股、美股、虛擬貨幣、存款等多類資產。本政策說明我們如何收集、使用、儲存與保護您的個人資料。</p>
@@ -158,7 +158,27 @@
   <li>當您刪除 App → 本機資料清除</li>
   <li>當您在 App 內執行「清除雲端資料」→ Firestore 對應資料移除</li>
   <li>Crashlytics 報告保留 90 天後自動刪除</li>
+  <li>OCR 上傳之圖片：傳送至 Google Gemini API 處理後，<strong>本服務不留存原始圖片</strong>，僅留存辨識結果（純文字數值）於您的 Firestore 帳號內</li>
 </ul>
+
+<h2>AI / OCR 文件辨識專章</h2>
+<p>當您使用「拍照匯入」或「上傳對帳單」等 AI 輔助功能時，請了解下列事項：</p>
+<ul>
+  <li>您上傳之圖片或截圖將透過 HTTPS / TLS 加密傳送至 <strong>Google Gemini API</strong> 進行文字辨識</li>
+  <li>圖片內容可能包含您的財務資訊（股票代號、金額、交易紀錄等），請於上傳前自行遮蔽不必要的個人資訊</li>
+  <li>Google Gemini API 之資料處理規則，適用 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google 隱私權政策</a> 及其 API 服務條款</li>
+  <li>辨識完成後，本服務僅儲存純文字辨識結果於您的帳號，<strong>不留存原始圖片</strong>於本服務之資料庫</li>
+  <li>首次使用 OCR 功能前，App 將另行取得您的明確同意（OCR 個資同意條款），您可隨時拒絕並改用手動輸入或 CSV 匯入</li>
+  <li>免費版每月有 OCR 使用次數上限；PRO 版享有更高配額</li>
+</ul>
+
+<h2>訂閱與收費</h2>
+<p>本 App 提供訂閱制 PRO 功能，相關條款（自動續訂、取消、退款政策、價格調整等）請參閱：</p>
+<ul>
+  <li><a href="./subscription-terms.html">訂閱條款</a> — 含完整自動續訂、退款、價格調整說明</li>
+  <li><a href="./terms.html">使用條款</a> — 含服務性質、責任限制、準據法</li>
+</ul>
+<p>訂閱付款由 <strong>Google Play 計費系統</strong>處理，本 App 不直接接收、儲存您的信用卡或付款資訊。</p>
 
 <h2>您的權利</h2>
 <ul>
@@ -183,7 +203,8 @@
 
 </main>
 <footer>
-本政策依據《個人資料保護法》（台灣）、GDPR（歐盟）、Google Play Developer Program Policies 制定。
+本政策依據《個人資料保護法》（台灣）、GDPR（歐盟）、Google Play Developer Program Policies 制定。<br>
+<a href="./terms.html">使用條款</a> · <a href="./subscription-terms.html">訂閱條款</a> · <a href="./data-collection.html">個人資料蒐集告知</a>
 </footer>
 </body>
 </html>
